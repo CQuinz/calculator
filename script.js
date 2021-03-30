@@ -28,20 +28,36 @@ const addDecimal = ()=>{
   }
 }
 
+// Calculate first and second values depending on operator
+const calculate = {
+  '/': (firstNumber, secondNumber) => firstNumber / secondNumber,
+
+  '*': (firstNumber, secondNumber) => firstNumber * secondNumber,
+
+  '+': (firstNumber, secondNumber) => firstNumber + secondNumber,
+
+  '-': (firstNumber, secondNumber) => firstNumber - secondNumber,
+
+  '=': (firstNumber, secondNumber) => secondNumber,
+};
+
 const useOperator = (operator)=>{
   const currentValue = Number(calculatorDisplay.textContent);
+  // Prevent multiple operators
+  if(operatorValue && awaitingNextValue){
+    return;
+  }
   // Assign firstValue if has no value
   if(!firstValue){
     firstValue = currentValue;
   }else{
-    console.log('currentValue: ', currentValue);
+    console.log(firstValue, operatorValue, currentValue);
+    const calculation
   }
   // ready for our next value, store the operator
   awaitingNextValue = true;
 
   operatorValue = operator;
-  console.log('firstValue: ', firstValue);
-  console.log('operatorValue: ', operatorValue);
 }
 
 // Add Event Listeners for numbers, operators, and decimal buttons
