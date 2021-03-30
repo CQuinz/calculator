@@ -7,13 +7,21 @@ let operatorValue = '';
 let awaitingNextValue = false;
 
 const sendNumValue = (number)=>{
-  // If current dispaly value is 0, weant to replace it, if not, add number
-  const displayValue = calculatorDisplay.textContent;
-  // Tierny condition
-  calculatorDisplay.textContent = displayValue === '0' ? number: displayValue + number;
+  // Replace current display value if first value is entered
+  if(awaitingNextValue){
+    calculatorDisplay.textContent = number;
+    awaitingNextValue = false;
+  }else{
+    // If current display value is 0, if not add number
+    const displayValue = calculatorDisplay.textContent;
+    // Tierny condition
+    calculatorDisplay.textContent = displayValue === '0' ? number: displayValue + number;
+  }
 }
 
 const addDecimal = ()=>{
+  // If operator pressed, don't add decimal
+  if(awaitingNextValue) return;
   // If no decimal, add one
   if(!calculatorDisplay.textContent.includes('.')){
     calculatorDisplay.textContent = `${calculatorDisplay.textContent}.`;
@@ -25,7 +33,12 @@ const useOperator = (operator)=>{
   // Assign firstValue if has no value
   if(!firstValue){
     firstValue = currentValue;
+  }else{
+    console.log('currentValue: ', currentValue);
   }
+  // ready for our next value, store the operator
+  awaitingNextValue = true;
+
   operatorValue = operator;
   console.log('firstValue: ', firstValue);
   console.log('operatorValue: ', operatorValue);
@@ -42,9 +55,13 @@ inputBtns.forEach((inputBtn)=>{
   }
 });
 
-// Reset display
+// Reset all values display
 const resetAll = ()=>{
   calculatorDisplay.textContent ='0';
+  firstValue = 0;
+  operatorValue = '';
+  awaitingNextValue = false;
+
 }
 
 // Event Listener for clearBtn
