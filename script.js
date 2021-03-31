@@ -45,6 +45,7 @@ const useOperator = (operator)=>{
   const currentValue = Number(calculatorDisplay.textContent);
   // Prevent multiple operators
   if(operatorValue && awaitingNextValue){
+    operatorValue = operator;
     return;
   }
   // Assign firstValue if has no value
@@ -54,6 +55,7 @@ const useOperator = (operator)=>{
     console.log(firstValue, operatorValue, currentValue);
     const calculation = calculate[operatorValue](firstValue, currentValue);
     console.log('calculation: ', calculation);
+    firstValue = calculation;
   }
   // ready for our next value, store the operator
   awaitingNextValue = true;
