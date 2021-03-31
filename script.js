@@ -52,7 +52,8 @@ const useOperator = (operator)=>{
     firstValue = currentValue;
   }else{
     console.log(firstValue, operatorValue, currentValue);
-    const calculation
+    const calculation = calculate[operatorValue](firstValue, currentValue);
+    console.log('calculation: ', calculation);
   }
   // ready for our next value, store the operator
   awaitingNextValue = true;
