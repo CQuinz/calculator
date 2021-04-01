@@ -55,6 +55,7 @@ const useOperator = (operator)=>{
     console.log(firstValue, operatorValue, currentValue);
     const calculation = calculate[operatorValue](firstValue, currentValue);
     console.log('calculation: ', calculation);
+    calculatorDisplay.textContent = calculation;
     firstValue = calculation;
   }
   // ready for our next value, store the operator
